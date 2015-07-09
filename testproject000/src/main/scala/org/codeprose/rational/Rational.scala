@@ -3,50 +3,26 @@
  * ========
  * 
  * **Rational** implements **rational numbers** in Scala to introduce some of the 
- * basic Scala concepts. More information on codeprose can be found on [github](http://example.com/ "codeprose on github").
+ * basic Scala concepts and highlight [codeprose](http://example.com/ "codeprose on github").
  *
  *It offers:
  *
  * +	Addition (<code>add()</code> and <code>+</code>)
- * +	Substraction (<code>substract()</code> and <code>-</code>)
+ * +	Subtraction (<code>subtract()</code> and <code>-</code>)
  * +	Multiplication (<code>multiply()</code> and <code>*</code>)
- * +	Implicit conversion of <code>Long</code> and <code>Int</code>
+ * +	Implicit conversion of <code>Int</code>
  * +	Automatic reduction
  * +	And more ...
  */
-
 package org.codeprose.rational
-
 /*
  * Rational
  * --------
  *
- * A sample application highlighting some features of <strong>org.codeprose.rational.Rational</strong>.
- */
-object Rational {
-  
-  def main(args: Array[String]): Unit = {
-	
-    println("[org.codeprose.rational.Rational]: Sample Application.")
-    val A = new Rational(1,7) 
-    val B = new Rational(1)
-    val C = A + B
-    val D = A.add(B)
-   
-    println(A + " + " + B + " = " + C)
-    println(A + " + " + B + " = " + D)
-
-  }
-}
-
-/*
- * Rational
- * --------
- *
- * Rational repesents a rational number in Scala.
+ * Rational represents a rational number in Scala.
  * 
  */
-class Rational (n: Long, d: Long){
+class Rational (n: Int, d: Int){
 
   require(d!=0)
   private val g = gcd(n,d)
@@ -54,9 +30,9 @@ class Rational (n: Long, d: Long){
   val denominator = d/g
   
   /*
-   * Overloaded constructor to allow initialization via a single Long.
+   * Overloaded constructor to allow initialization via a single Int.
    */
-  def this(n: Long) = this(n,1)
+  def this(n: Int) = this(n,1)
   
   /*
    * ### Addition 
@@ -73,9 +49,9 @@ class Rational (n: Long, d: Long){
   /*
    * Overloaded Addition
    * 
-   * Allows the addition of a Long to a Rational number.
+   * Allows the addition of an Int to a Rational number.
    */
-  def add (that: Long) : Rational = {
+  def add (that: Int) : Rational = {
     this.add(new Rational(that))
   }
     
@@ -92,26 +68,25 @@ class Rational (n: Long, d: Long){
   /*
    * Overloaded Multiplication
    * 
-   * Allows the multiplication of a Rational number with a Long.
+   * Allows the multiplication of a Rational number with an Int.
    */
-  def multiply(that: Long) : Rational = 
-     this.multiply(new Rational(that))
+  def multiply(that: Int) : Rational = this.multiply(new Rational(that))
   
   /*
-   * ### Substraction
+   * ### Subtraction
    */
-  def substract (that: Rational) : Rational = {
+  def subtract (that: Rational) : Rational = {
     new Rational(
         this.numerator*that.denominator - this.denominator*that.numerator,
         this.denominator*that.numerator
         )
   }
   /*
-   * Overloaded Substraction
+   * Overloaded Subtraction
    * 
-   * Allows the substraction of a Long from a Rational number.
+   * Allows the subtraction of an Int from a Rational number.
    */
-  def substract (that: Long) : Rational = this.substract(new Rational(that))
+  def subtract (that: Int) : Rational = this.subtract(new Rational(that))
 
   /*
    * ### Operator Overloading
@@ -119,27 +94,27 @@ class Rational (n: Long, d: Long){
    * For:
    *
    * +	Addition
-   * +	Substraction
+   * +	Subtraction
    * +	Multiplication
    */
   def + (that: Rational) : Rational = add(that)
-  def + (that: Long) : Rational = add(that)
+  def + (that: Int) : Rational = add(that)
 
   def * (that: Rational) : Rational = multiply(that)  
-  def * (that: Long) : Rational = multiply(that)
+  def * (that: Int) : Rational = multiply(that)
 
-  def - (that: Rational) : Rational = substract(that)
-  def - (that: Long) : Rational = substract(that)
+  def - (that: Rational) : Rational = subtract(that)
+  def - (that: Int) : Rational = subtract(that)
 
   /*
-   * Visiable appealing toString() output.
+   * Visibly appealing toString() output.
    */
-  override def toString = numerator + "/" + denominator
+  override def toString = "(" + numerator + "/" + denominator + ")"
   
   /*
    * ### GCD: Greatest Common Divisor
    *
-   * Calcuates the gcd. Used in the constructor to automatically reduce the represented fration.
+   * Calculates the gcd. Used in the constructor to automatically reduce the represented fraction.
    *
    */
   /**
@@ -148,17 +123,8 @@ class Rational (n: Long, d: Long){
    * @param b A whole number
    * @return The largest positive integer that divides a and b without a remainder.
    */	
-  private def gcd(a: Long, b: Long) : Long = {
+  private def gcd(a: Int, b: Int) : Int = {
     if(b==0) a else gcd(b, a % b)
-  }
-    
-  /*
-   * ### Implicit conversions
-   *
-   * The implicit conversions with allowing a simple addtion of a Long with a Rational number.
-   */
-  // Implicit conversions 
-  // implicit def longToRational(l: Long) = new Rational(l)
-  
+  }  
 }
 
