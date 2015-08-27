@@ -1,4 +1,4 @@
-package org.codeprose
+package org.codeprose.rational
 
 package object rational {
    
