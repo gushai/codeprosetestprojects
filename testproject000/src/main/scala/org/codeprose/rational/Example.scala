@@ -24,11 +24,13 @@ object Example {
     println(C + " + " + D + " = " + (C + D))
     println(5 + " + " + D + " = " + E)
 
+
     val longStr = s"""[org.codeprose.rational.Example]
     second line
     third line"""
 
 
+    val xmlInString = s"""<div id="foo"></div>"""
 
 
   }
