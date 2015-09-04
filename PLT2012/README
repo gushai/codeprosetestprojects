@@ -1,0 +1,9 @@
+This repository stores material that belongs to the course "Programming Languages and Types" at Marburg University. 
+
+Our webpage is: http://www.uni-marburg.de/fb12/ps/
+
+Changes:
+
+20150904 - Added package names to scala files to illustrate codeprose sorting by package name.
+20150904 - Packaged each files code in an object and renamed (dirty) some components to avoid name clashes.
+
