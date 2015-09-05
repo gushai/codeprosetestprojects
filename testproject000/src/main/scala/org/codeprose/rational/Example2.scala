@@ -46,3 +46,34 @@ trait Foo {
   trait Boo
 
 }
+
+/*
+*Companion Object
+*================
+*
+* Test jump to companion object.
+*
+*/
+
+class Companion(foo: String)
+
+object Companion {
+  def apply(foo: String) = new Companion(foo)
+}
+
+
+trait CompanionTest {
+
+	def bar() : Unit = {
+		val a = Companion("a");
+	}
+
+}
+
+
+
+
+
+
+
+

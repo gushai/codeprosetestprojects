@@ -7,6 +7,6 @@ package object rational {
    *
    * The implicit conversion which allows a simple addition of an Int with a Rational number.
    */  
-  implicit def intToRational(l: Int) = new Rational(l)
+  implicit def intToRational(l: Int) = Rational(l)
   
 }

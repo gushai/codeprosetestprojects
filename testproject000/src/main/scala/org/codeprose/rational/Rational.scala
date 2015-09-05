@@ -127,3 +127,23 @@ class Rational (n: Int, d: Int){
     if(b==0) a else gcd(b, a % b)
   }
 }
+
+
+/*
+ * Companion Object 
+ * ----------------
+ * 
+ * The Rational companion object implements several factory methods.
+ *
+ */
+
+
+object Rational {
+
+  def apply(n: Int) = new Rational(n,1)
+  def apply(n: Int, d: Int) = new Rational(n,d)
+
+  implicit def intToRational(l: Int) = Rational(l)
+}
+
+
