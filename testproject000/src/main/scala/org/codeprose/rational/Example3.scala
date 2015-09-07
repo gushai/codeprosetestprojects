@@ -23,14 +23,15 @@ class SomeClass()(implicit c: Base){
     a+b+c.a+shift
   }
   
- /* Can not return list as this kills the ensime client! spray.json can not parse the return object
+ /* Can not return list as this kills the ensime client! spray.json can not parse the return object.
   *  
   */
-  /* def packageTogether(a:Int, b: Int) : List[Int] = {
-    
-    // List(c.a,a,b)
- 
-  } */
+  /* 
+   * def packageTogether(a:Int, b: Int) : List[Int] = {
+   *  List(c.a,a,b)
+   * }
+   * 
+   */
   
   
   
@@ -38,7 +39,29 @@ class SomeClass()(implicit c: Base){
     
   }
   
+  
+  def fooWithFunctionArugment(a: Int,shifter: (Int) => Int) : Int = {
+    shifter(a)
+  }
+  
+  def currying(a: Int)(b: Int)(c: Int) : Int = {
+    a+b+c
+  }
+  
+  def curryingWithFunctionArg(shifter: Int => Int)(a: Int)(b: Int) : Int = {
+    shifter(b) + shifter(a)
+  }
+  
+  def curryingWithFuncArgImpltArg(
+      shifter: Int => Int)(a: Int)(b: Int)(implicit base: Int) : Int = {
+    base + shifter(b) + shifter(a)
+  }
+  
+  def notImplemented() = ???
+  
 }
+
+
 
 /*
 *Illustration
@@ -61,12 +84,25 @@ object Example3 {
     
     val somenumber = foo.add(1,2)
     
-    
-    // Removed see above.
-    //val listOfInts = foo.packageTogether(2,3)
-    
-    
     foo.doesNothing(0)
+    
+    
+    val curryPartial = foo.currying(5)_
+    val curryFull = curryPartial(5)(5)
+    
+    val shiftByOne = (x: Int) => x+1
+    
+    val curryWithFuncPartial = foo.curryingWithFunctionArg(shiftByOne)_
+    val curryWithFunc = curryWithFuncPartial(5)(5)
+    
+ 
+    val curryWithFuncAndImplicitPartial = foo.curryingWithFuncArgImpltArg(shiftByOne)_
+    val curryWithFuncAndImplicit = curryWithFuncAndImplicitPartial(10)(10)
+    
+    
+    val curryWithAnonFuncAndImplPart = foo.curryingWithFuncArgImpltArg((x: Int) => x + 314)_
+    val curryWithAnonFuncAndImpl = curryWithAnonFuncAndImplPart(11)(11)
+    
     
     
     // Implicit conversion
